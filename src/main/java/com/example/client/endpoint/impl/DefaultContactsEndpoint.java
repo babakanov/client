@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class DefaultContactsEndpoint implements ContactsEndpoint {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ContactsDto create(Long clientId, ContactsRequest request) throws NotFoundException {
+        validate(request);
         Client client = clientService.get(clientId);
         Contacts contacts = contactsMapper.create(request, client);
         contactsService.saveOrUpdate(contacts);
@@ -58,5 +60,11 @@ public class DefaultContactsEndpoint implements ContactsEndpoint {
         List<Contacts> contacts = contactsService.getByClient(client);
 
         return contactsMapper.toDto(contacts);
+    }
+
+    private void validate(ContactsRequest request) {
+        if ((Objects.isNull(request.getEmail()) || request.getEmail().isEmpty()) && (Objects.isNull(request.getPhoneNumber()) || request.getPhoneNumber().isEmpty()))
+        throw new RuntimeException("Оба поля не должны быть пустыми");
+
     }
 }
