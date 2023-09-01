@@ -1,23 +1,15 @@
 server:
-  port: 8084
+  port: 8081
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/client
-    driverClassName: org.postgresql.Driver
-    password: postgres
-    username: postgres
+    url: jdbc:mysql://localhost:3306/client
+    driverClassName: com.mysql.cj.jdbc.Driver
+    password: mysql
+    username: root
   flyway:
     out-of-order: true
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: validate
-    properties:
-      hibernate:
-        temp:
-          use_jdbc_metadata_defaults: false
-      org:
-        hibernate:
-          envers:
-            store_data_at_delete: true

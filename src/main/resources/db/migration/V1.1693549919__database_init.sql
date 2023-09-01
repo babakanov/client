@@ -1,13 +1,15 @@
-create table if not exists client
+CREATE TABLE IF NOT EXISTS client
 (
-    id       bigserial primary key,
-    name     varchar(255) not null
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name            VARCHAR(255) NOT NULL
 );
 
-create table if not exists contacts
+-- Создаем таблицу contacts, если она не существует
+CREATE TABLE IF NOT EXISTS contacts
 (
-    id              bigserial primary key,
-    email           varchar(255) not null,
-    phone_number    varchar(255) not null,
-    client_id       bigint references client (id)
+    id              BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email           VARCHAR(255) NOT NULL,
+    phone_number    VARCHAR(255) NOT NULL,
+    client_id       BIGINT,
+    FOREIGN KEY     (client_id) REFERENCES client (id)
 );
