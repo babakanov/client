@@ -34,7 +34,7 @@ public class ClientController {
     }
 
     @GetMapping("/all")
-    @ApiOperation("Получить информацию о клиенте")
+    @ApiOperation("Получить информацию о всех клиентах")
     public List<ClientDto> getAll() throws NotFoundException {
         return clientEndpoint.getAll();
     }

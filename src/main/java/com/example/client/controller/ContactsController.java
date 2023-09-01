@@ -31,19 +31,19 @@ public class ContactsController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("Получить информацию о клиенте")
+    @ApiOperation("Получить информацию о контакте")
     public ContactsDto get(@PathVariable Long id) throws NotFoundException {
         return endpoint.get(id);
     }
 
     @GetMapping("/all")
-    @ApiOperation("Получить информацию о клиенте")
+    @ApiOperation("Получить информацию о всех контактах")
     public List<ContactsDto> getAll() throws NotFoundException {
         return endpoint.getAll();
     }
 
     @GetMapping("/all-by-client/{clientId}")
-    @ApiOperation("Получить информацию о клиенте")
+    @ApiOperation("Получить информацию о контактах по клиенту")
     public List<ContactsDto> getAllByClient(@PathVariable Long clientId) throws NotFoundException {
         return endpoint.getAllByClient(clientId);
     }
